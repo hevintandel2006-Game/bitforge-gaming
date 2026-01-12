@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BitForge Gaming - 4-Bit ALU Arena</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Courier New', monospace; 
+            background: linear-gradient(45deg, #0a0a23, #1a1a3a, #16213e);
+            color: #00ff88; 
+            min-height: 100vh;
+        }
+        .header { 
+            background: rgba(0,0,0,0.9); 
+            padding: 20px; 
+            text-align: center; 
+            border-bottom: 3px solid #ff6b9d;
+        }
+        .nav { 
+            display: flex; 
+            justify-content: center; 
+            background: rgba(255,107,157,0.2); 
+            padding: 10px; 
+        }
+        .nav a { 
+            color: #00ff88; 
+            text-decoration: none; 
+            margin: 0 20px; 
+            font-size: 18px; 
+            padding: 10px 20px; 
+            border-radius: 20px; 
+            transition: all 0.3s;
+        }
+        .nav a:hover { background: #ff6b9d; color: white; }
+        .game-container { 
+            max-width: 1000px; 
+            margin: 30px auto; 
+            padding: 30px; 
+            background: rgba(0,0,0,0.8); 
+            border-radius: 20px; 
+            text-align: center;
+        }
+        .game-title { color: #ff6b9d; font-size: 36px; margin-bottom: 20px; }
+        .play-btn { 
+            background: linear-gradient(45deg, #ff6b9d, #c44569); 
+            color: white; 
+            border: none; 
+            padding: 20px 40px; 
+            font-size: 24px; 
+            border-radius: 30px; 
+            cursor: pointer; 
+            margin: 20px;
+            transition: all 0.3s;
+        }
+        .play-btn:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(255,107,157,0.5); }
+        .c-game { 
+            background: #16213e; 
+            padding: 30px; 
+            border-radius: 15px; 
+            margin-top: 30px; 
+            border-left: 5px solid #00ff88;
+        }
+        .footer { 
+            text-align: center; 
+            padding: 20px; 
+            background: rgba(0,0,0,0.9); 
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚡ BITFORGE GAMING ⚡</h1>
+        <p>4-Bit ALU Arena | Learn Computer Architecture Through Games</p>
+    </div>
+    
+    <div class="nav">
+        <a href="#home">🏠 Home</a>
+        <a href="#alu-game">🎮 ALU Game</a>
+        <a href="#c-game">💻 C Game</a>
+        <a href="#about">📚 Learn</a>
+    </div>
+    
+    <div class="game-container" id="home">
+        <h2 class="game-title">4-Bit Adder/Subtractor + RISC vs CISC</h2>
+        <p>Master computer architecture through interactive challenges!</p>
+        <button class="play-btn" onclick="showGame('alu')">🚀 PLAY WEB GAME</button>
+        <button class="play-btn" onclick="showGame('c')">⚙️ PLAY C GAME</button>
+    </div>
+    
+    <!-- WEB ALU GAME -->
+    <div id="alu-game" class="game-container" style="display:none;">
+        <h2>🎯 4-Bit ALU Challenge</h2>
+        <!-- [Previous ALU game code goes here - paste the full HTML/JS game] -->
+        <button onclick="showGame('home')" class="play-btn">🏠 Back to Home</button>
+    </div>
+    
+    <!-- C GAME INSTRUCTIONS -->
+    <div id="c-game" class="game-container" style="display:none;">
+        <div class="c-game">
+            <h2>💻 C Language ALU Battle</h2>
+            <pre style="background:#0a0a23; padding:20px; border-radius:10px; text-align:left; max-height:400px; overflow:auto;">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+int main() {
+    // [PASTE FULL C GAME CODE HERE]
+}
+            </pre>
+            <h3>📱 PLAY INSTANTLY:</h3>
+            <a href="https://www.onlinegdb.com/online_c_compiler" target="_blank" class="play-btn">▶️ OnlineGDB</a>
+            <a href="https://replit.com/languages/c" target="_blank" class="play-btn">▶️ Replit</a>
+        </div>
+        <button onclick="showGame('home')" class="play-btn">🏠 Back to Home</button>
+    </div>
+    
+    <div class="footer">
+        <p>Made for COA Learning | 4-Bit Adder-Subtractor + RISC/CISC | © 2026</p>
+    </div>
+
+    <script>
+        function showGame(type) {
+            document.querySelectorAll('.game-container').forEach(el => el.style.display = 'none');
+            if(type === 'alu') document.getElementById('alu-game').style.display = 'block';
+            else if(type === 'c') document.getElementById('c-game').style.display = 'block';
+            else document.getElementById('home').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
