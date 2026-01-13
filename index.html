@@ -90,10 +90,19 @@
     
     <!-- WEB ALU GAME -->
     <div id="alu-game" class="game-container" style="display:none;">
-        <h2>🎯 4-Bit ALU Challenge</h2>
-        <!-- [Previous ALU game code goes here - paste the full HTML/JS game] -->
-        <button onclick="showGame('home')" class="play-btn">🏠 Back to Home</button>
+    <h2>🎯 4-Bit ALU Challenge</h2>
+    <div style="font-size:24px; padding:20px; background:#16213e; margin:20px; border-radius:15px;">
+        Challenge: <span id="chA">----</span> <span id="chOp">+</span> <span id="chB">----</span> = ?
     </div>
+    <input id="answer" type="text" maxlength="4" placeholder="1101" 
+           style="padding:15px; font-size:20px; width:250px;">
+    <br><button class="play-btn" onclick="checkAnswer()">✅ CHECK</button>
+    <button class="play-btn" onclick="newChallenge()">🎲 NEW</button>
+    <div id="result" style="font-size:28px; margin:20px;"></div>
+    <div id="score" style="font-size:20px;">Score: 0</div>
+    <button onclick="showGame('home')" class="play-btn">🏠 Home</button>
+</div>
+
     
     <!-- C GAME INSTRUCTIONS -->
     <div id="c-game" class="game-container" style="display:none;">
@@ -126,6 +135,34 @@ int main() {
             else if(type === 'c') document.getElementById('c-game').style.display = 'block';
             else document.getElementById('home').style.display = 'block';
         }
+
+        let score = 0, a=0, b=0, sub=0, expected=0;
+function newChallenge() {
+    a = Math.floor(Math.random()*16);
+    b = Math.floor(Math.random()*16);
+    sub = Math.random()<0.5 ? 0 : 1;
+    expected = 0; let c = sub;
+    for(let i=0; i<4; i++) {
+        let ai=(a>>i)&1, bi=((b>>i)&1)^sub;
+        let s = ai^bi^c; expected |= s<<i; c=(ai&bi)|(ai&c)|(bi&c);
+    }
+    document.getElementById('chA').textContent = a.toString(2).padStart(4,'0');
+    document.getElementById('chB').textContent = b.toString(2).padStart(4,'0');
+    document.getElementById('chOp').textContent = sub ? '-' : '+';
+    document.getElementById('answer').value = '';
+}
+function checkAnswer() {
+    let user = parseInt(document.getElementById('answer').value,2);
+    if(user === expected) {
+        score += 10; document.getElementById('result').innerHTML = '✅ CORRECT!';
+    } else {
+        document.getElementById('result').innerHTML = '❌ Expected: ' + expected.toString(2).padStart(4,'0');
+    }
+    document.getElementById('score').textContent = 'Score: ' + score;
+}
+newChallenge();
+
     </script>
 </body>
 </html>
+
