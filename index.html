@@ -135,12 +135,30 @@ int main() {
             else if(type === 'c') document.getElementById('c-game').style.display = 'block';
             else document.getElementById('home').style.display = 'block';
         }
+// ---------- 1’s COMPLEMENT ----------
+function onesComplement(x) {
+    return (~x) & 0b1111;   // 4-bit mask
+}
+
+// ---------- 2’s COMPLEMENT ----------
+function twosComplement(x) {
+    return (onesComplement(x) + 1) & 0b1111;
+}
 
         let score = 0, a=0, b=0, sub=0, expected=0;
 function newChallenge() {
     a = Math.floor(Math.random()*16);
     b = Math.floor(Math.random()*16);
     sub = Math.random()<0.5 ? 0 : 1;
+    // ----- COA Subtraction Logic -----
+if(sub === 1) {
+    // show complements for COA concept
+    let ones = onesComplement(b);
+    let twos = twosComplement(b);
+    console.log("1’s Complement of B:", ones.toString(2));
+    console.log("2’s Complement of B:", twos.toString(2));
+}
+
     expected = 0; let c = sub;
     for(let i=0; i<4; i++) {
         let ai=(a>>i)&1, bi=((b>>i)&1)^sub;
@@ -157,12 +175,21 @@ function checkAnswer() {
         score += 10; document.getElementById('result').innerHTML = '✅ CORRECT!';
     } else {
         document.getElementById('result').innerHTML = '❌ Expected: ' + expected.toString(2).padStart(4,'0');
+        if(sub === 1) {
+        document.getElementById('result').innerHTML +=
+            "<br>1’s Comp(B): " +
+            onesComplement(b).toString(2).padStart(4,'0') +
+            "<br>2’s Comp(B): " +
+            twosComplement(b).toString(2).padStart(4,'0');
+    
     }
     document.getElementById('score').textContent = 'Score: ' + score;
+    
 }
 newChallenge();
 
     </script>
 </body>
 </html>
+
 
