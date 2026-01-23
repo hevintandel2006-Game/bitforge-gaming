@@ -84,7 +84,10 @@
     <div class="game-container" id="home">
         <h2 class="game-title">4-Bit Adder/Subtractor + RISC vs CISC</h2>
         <p>Master computer architecture through interactive challenges!</p>
-        <button class="play-btn" onclick="showGame('alu')">🚀 PLAY WEB GAME</button>
+       <button class="play-btn" onclick="showGame('alu'); newChallenge();">
+    🚀 PLAY WEB GAME
+</button>
+
         <button class="play-btn" onclick="showGame('c')">⚙️ PLAY C GAME</button>
     </div>
     
@@ -108,6 +111,11 @@
     <div id="c-game" class="game-container" style="display:none;">
         <div class="c-game">
             <h2>💻 C Language ALU Battle</h2>
+            <p style="color:#00ff88; font-size:18px;">
+Enter the 4-bit binary result and press CHECK.  
+New challenge appears automatically.
+</p>
+
             <pre style="background:#0a0a23; padding:20px; border-radius:10px; text-align:left; max-height:400px; overflow:auto;">
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
@@ -184,6 +192,8 @@ function checkAnswer() {
     
     }
     document.getElementById('score').textContent = 'Score: ' + score;
+        setTimeout(newChallenge, 1500);
+
     
 }
 newChallenge();
@@ -191,5 +201,6 @@ newChallenge();
     </script>
 </body>
 </html>
+
 
 
